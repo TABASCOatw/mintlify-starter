@@ -1,0 +1,76 @@
+---
+title: 'Universal Accounts SDK FAQ'
+sidebarTitle: 'FAQ'
+description: 'Frequently Asked Questions about integrating the Universal Accounts SDK.'
+---
+
+<AccordionGroup>
+
+<Accordion title="What is the Universal Accounts SDK?" icon="browser">
+**Answer:** The Universal Accounts SDK lets you integrate Particle's Chain Abstraction stack into your app. It provides a unified address and balance for users across EVM chains and Solana.
+
+You can use the SDK to:
+- Give users a unified assets balance and identity across chains and ecosystems
+- Execute transactions across chains without bridging or transferring assets
+</Accordion>
+
+<Accordion title="Which platforms are supported?" icon="desktop">
+**Answer:** The SDK is available for Web.
+
+<Tip>Check out the [SDK Reference](/universal-accounts/ua-reference/desktop/web) for detailed platform-specific docs.</Tip>
+</Accordion>
+
+<Accordion title="What are primary assets and how do they work?" icon="coins">
+**Answer:** Primary assets are tokens composing the Universal Balance the Universal Accounts SDK uses as sources for transactions. These assets are used for gas, swaps, and liquidity routing—even across chains.
+
+<Note>
+  Default primary assets include:
+  - **ETH**
+  - **USDT**
+  - **USDC**
+  - **BTC**
+  - **SOL**
+  - **BNB**
+</Note>
+
+Users can hold primary assets on any [supported chain](/universal-accounts/cha/chains). When a transaction (like a swap or transfer) is initiated, the SDK:
+- Selects the most optimal primary asset from the user's portfolio (e.g., USDT on Polygon)
+- Handles liquidity routing automatically through Universal Liquidity
+- Completes the transaction on the target chain (e.g., BNB Chain), even if the user has **no funds** on that chain
+
+This system eliminates the need for manual bridging or gas management, streamlining cross-chain activity.
+</Accordion>
+
+<Accordion title="Do users need to deposit assets into their Universal Account?" icon="vault">
+**Answer:** Yes. The Universal Account is an ERC-4337 smart account, which means users must deposit assets into it before they can use Universal Liquidity or perform cross-chain transactions.
+
+The account doesn't pull assets from external wallets like MetaMask—it only operates on the assets deposited into the Universal Account itself.
+
+<Note>
+If a user already holds funds on [UniversalX](https://universalx.app), those balances are already available and usable through the SDK.
+</Note>
+
+To enable swaps, transfers, or contract calls:
+- Users must hold **at least one primary asset** (e.g., ETH, USDC, USDT) on their Universal Account.
+- Once deposited, the SDK can route liquidity across supported chains.
+</Accordion>
+
+<Accordion title="Do Universal Accounts have private keys?" icon="lock-open">
+**Answer:** No. Universal Accounts are ERC-4337 smart accounts—they don’t have private keys like traditional EOAs (Externally Owned Accounts).
+
+Instead, ownership and permissions are managed via a signer (such as a user's wallet or social login) that authorizes transactions.
+</Accordion>
+<Accordion title="What are the transaction fees?" icon="file-invoice-dollar">
+**Answer:** Each transaction includes:
+
+- **Standard gas fees** for execution on the destination chain  
+- A **20 basis points (0.20%) fee** paid to the LP (liquidity provider) that facilitates the transaction
+
+These fees are automatically calculated and included in the transaction quote returned by the SDK. Users don’t need to manage gas tokens—**Universal Liquidity handles routing and fee payments behind the scenes**.
+</Accordion>
+</AccordionGroup>
+
+<Note>
+**Still need help?**
+Reach out to [support on Telegram](https://t.me/particle_developer_bot) to get direct help from Particle’s Developer Relations team.
+</Note>
